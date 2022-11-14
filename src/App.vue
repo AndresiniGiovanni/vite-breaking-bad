@@ -4,11 +4,12 @@
   </header>
   <main>
     <MainComponent />
-    <CharacterList />
+    <CharacterList :characters="CharacterList" />
   </main>
 </template>
 
 <script>
+
 import axios from "axios";
 import CharacterList from "./components/CharacterList.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
