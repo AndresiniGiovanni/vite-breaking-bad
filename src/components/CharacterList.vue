@@ -1,10 +1,12 @@
 <template>
-
-  <section>
-    <div class="container-fluid my-cont bg-white">
-  <div class="container bg-light pt-4 char-cont">
-    <div class="characters-found text-white">coming soon</div>
+  <div class="container">
+    <div class="text-white" v-if="loading">Loading</div>
   </div>
+  <section v-if="!loading">
+    <div class="container-fluid my-cont bg-white">
+      <div class="container bg-light pt-4 char-cont">
+        <div class="characters-found text-white">coming soon</div>
+      </div>
       <div class="row d-flex justify-content-center">
         <div
           class="col-lg-2 col-md-6 card border-0 rounded-0 p-2 my-card m-2"
@@ -31,20 +33,20 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/styles/partials/variables" as *;
 
-.characters-found{
-    margin: 0 auto;
-    width: 100%;
-    height: 40px;
+.characters-found {
+  margin: 0 auto;
+  width: 95%;
+  height: 40px;
+  background-color: $darkgray;
 }
-.my-cont
- {
+.my-cont {
   width: 70%;
 }
 
 .my-card {
   background-color: $bluegray;
 }
-.my-color{
-    color: $textgray;
+.my-color {
+  color: $textgray;
 }
 </style>
