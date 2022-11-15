@@ -3,8 +3,8 @@
     <HeaderComponent />
   </header>
   <main>
-    <MainComponent />
-    <CharacterList :characters="CharacterList" />
+    <MainComponent @filterchar="getCharacters" />
+    <CharacterList />
   </main>
 </template>
 
@@ -13,6 +13,7 @@ import axios from "axios";
 import CharacterList from "./components/CharacterList.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
 import MainComponent from "./components/MainComponent.vue";
+import { store } from "./store";
 export default {
   components: {
     MainComponent,
@@ -21,25 +22,24 @@ export default {
   },
   data() {
     return {
-      apiURL: "https://www.breakingbadapi.com/api/characters",
-      CharacterList: [],
-      loading: false,
+      store,
+      endPoint: "characters",
     };
   },
   methods: {
     getCharacters() {
-      this.loading = true;
-      axios
-        .get(this.apiURL)
-        .then((res) => {
-          console.log(res.data);
-          this.CharacterList = [...res.data];
-          console.log(this.CharacterList);
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (store.searchStatus) {
+        option = {
+          params: {
+            category: store.searchStatus,
+          },
+        };
+      }
+
+      const apiURL = store.apiURL + this.endPoint;
+      axios.get(apiURL).then((res) => {
+        store.CharacterList = res.data;
+      });
     },
   },
   created() {

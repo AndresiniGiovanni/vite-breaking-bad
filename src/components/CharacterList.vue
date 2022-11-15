@@ -1,8 +1,5 @@
 <template>
-  <div class="container">
-    <div class="text-white" v-if="loading">Loading</div>
-  </div>
-  <section v-if="!loading">
+  <section>
     <div class="container-fluid my-cont bg-white">
       <div class="container bg-light pt-4 char-cont">
         <div class="characters-found text-white">coming soon</div>
@@ -10,7 +7,7 @@
       <div class="row d-flex justify-content-center">
         <div
           class="col-lg-2 col-md-6 card border-0 rounded-0 p-2 my-card m-2"
-          v-for="(item, index) in characters"
+          v-for="(item, index) in store.CharacterList"
           key="item.char_id"
         >
           <img :src="item.img" alt="" />
@@ -24,9 +21,14 @@
 </template>
 
 <script>
+import { store } from "../store";
 export default {
   name: "characterList",
-  props: ["characters"],
+  data() {
+    return {
+      store
+    }
+  },
 };
 </script>
 
