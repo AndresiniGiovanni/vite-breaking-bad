@@ -1,11 +1,12 @@
 <template>
   <main class="container">
-    <form class="d-flex align-items-start" @submit.prevent="searchCharacters">
+    <form @submit.prevent="searchCharacters">
       <select
         value=""
-        class="form-select my-select mb-4 "
+        class="form-select my-select mb-4"
         aria-label=""
         v-model="store.searchStatus"
+        @change="searchCharacters"
       >
         <option selected>Select Category</option>
         <option
@@ -16,7 +17,6 @@
           {{ category }}
         </option>
       </select>
-      <button class="btn btn-primary ms-2" type="submit">search</button>
     </form>
   </main>
 </template>
