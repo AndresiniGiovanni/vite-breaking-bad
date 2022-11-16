@@ -4,7 +4,7 @@
   </header>
   <main>
     <MainComponent @filterchar="getCharacters" />
-    <CharacterList />
+    <CharacterList :characters="CharacterList" />
   </main>
 </template>
 
@@ -27,17 +27,18 @@ export default {
     };
   },
   methods: {
-    getCharacters() {
-      if (store.searchStatus) {
-        option = {
+    getCharacters(category) {
+      let options = null;
+      if (category) {
+        options = {
           params: {
-            category: store.searchStatus,
+            category: category,
           },
         };
       }
 
       const apiURL = store.apiURL + this.endPoint;
-      axios.get(apiURL).then((res) => {
+      axios.get(apiURL, options).then((res) => {
         store.CharacterList = res.data;
       });
     },

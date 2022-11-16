@@ -1,21 +1,22 @@
 <template>
   <main class="container">
-    <form @submit.prevent="searchCharacters">
+    <form class="d-flex align-items-start" @submit.prevent="searchCharacters">
       <select
         value=""
-        class="form-select my-select mb-4"
+        class="form-select my-select mb-4 "
         aria-label=""
         v-model="store.searchStatus"
       >
         <option selected>Select Category</option>
         <option
-          :value="item"
-          v-for="(item, index) in categoryOption"
+          :value="category"
+          v-for="(category, index) in categoryOption"
           :key="index"
         >
-          {{ item }}
+          {{ category }}
         </option>
       </select>
+      <button class="btn btn-primary ms-2" type="submit">search</button>
     </form>
   </main>
 </template>
@@ -23,6 +24,7 @@
 <script>
 import { store } from "../store";
 export default {
+  name: "MainComponent",
   data() {
     return {
       store,
@@ -31,7 +33,8 @@ export default {
   },
   methods: {
     searchCharacters() {
-      this.$emit("filterchar");
+      console.log(store.searchStatus);
+      this.$emit("filterchar", store.searchStatus);
     },
   },
 };
